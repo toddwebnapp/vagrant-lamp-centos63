@@ -66,9 +66,6 @@ class phpdevweb
 			source  => "/vagrant/files/httpd/conf.d/vhost.conf"
 			;
 		"/etc/httpd/vhosts":
-		    ensure => "directory"
-		    ;
-		"/etc/httpd/vhosts":
 			replace => true,
 			ensure  => present,
 			source  => "/vagrant/files/httpd/vhosts",
@@ -114,7 +111,6 @@ class phpdevweb
 		"php-pecl-memcache",
 		"php-pecl-xdebug",
 		"php-pecl-apc",
-		"phpMyAdmin",
 	]:
 		ensure  => present,
 		require => Exec["grab-epel"]
@@ -136,17 +132,6 @@ class phpdevweb
 			replace => true,
 			ensure  => present,
 			source  => "/vagrant/files/php.ini"
-			;
-		"/etc/httpd/conf.d/phpMyAdmin.conf":
-			replace => true,
-			ensure  => present,
-			source  => "/vagrant/files/httpd/conf.d/phpMyAdmin.conf"
-			;
-		"/etc/phpMyAdmin/config.inc.php":
-			replace => true,
-			ensure  => present,
-			source  => "/vagrant/files/phpmy_admin_config.inc.php",
-			require => Package["phpMyAdmin"]
 			;
 	}
 
